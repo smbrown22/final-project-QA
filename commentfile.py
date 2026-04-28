@@ -52,6 +52,7 @@ class Player:
         return "Item not found in inventory."
 
     def get_stats(self):
+        # dmg will always be 0 since weapon initalizes as 0 
         dmg = self.equipped_weapon.damage if self.equipped_weapon else 0
         defense = self.equipped_armor.defense if self.equipped_armor else 0
         return {"name": self.name, "gold": self.gold, "health": self.health,
@@ -80,11 +81,13 @@ class Shop:
         entry = self.stock[item_name]
         item = entry["item"]
 
+        # less than instead of less than = to? 
         if entry["quantity"] < quantity:
             return "Not enough stock."
 
         total_cost = item.price * quantity
 
+        # another less than instead of less than = to 
         if player.gold < total_cost:
             return "Not enough gold."
 

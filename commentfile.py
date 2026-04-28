@@ -35,11 +35,13 @@ class Player:
         for item in self.inventory:
             if item.item_type == "potion":
                 self.inventory.remove(item)
+                # increase but no cap, max health can be bypassed  
                 self.health += 30
                 return f"{self.name} used {item.name}. Health: {self.health}"
         return "No potions in inventory."
 
     def equip(self, item_name):
+        # this may be the thing that can't be done twice in a row? 
         """Equip a weapon or armor from inventory."""
         for item in self.inventory:
             if item.name == item_name:
@@ -136,7 +138,8 @@ class Shop:
 
         return f"Sold {quantity}x {item_name} for {total}g."
 
-    def apply_discount(self, item_name, percent):
+    def apply_discount(self, item_name, percent):\
+    # can apply a 100% discount 
         """Apply a percentage discount to an item's price (e.g. 20 = 20% off)."""
         if item_name not in self.stock:
             return "Item not found."
